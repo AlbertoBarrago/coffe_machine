@@ -21,7 +21,7 @@ def check_resources(type_selected):
     for resource in conf['resources']:
         if conf['resources'][resource] < conf['ingredients'][type_selected][resource]:
             print(f'Sorry, we don\'t have enough {resource}.')
-            return False
+            exit("🤡Machine is out of resources. Call the admin!")
     return True
 
 
@@ -86,15 +86,13 @@ def start_coffe_machine(name):
             exit_from_process = True
 
     while has_enough_ingredients:
-        if input(f"\nDo you wanna do a coffe with {name}'s coffe machine?\n") == 'y':
-            print('Okay, let\'s start!')
-            option = get_options()
-            if check_resources(option):
-                money_payed = askMoney()
-                calculate_change(money_payed, conf['cost'][option])
-                prepare_machine(option)
-        else:
-            exit(code="200: Bye, bye the machine go off.")
+        option = get_options()
+        if check_resources(option):
+            money_payed = askMoney()
+            calculate_change(money_payed, conf['cost'][option])
+            prepare_machine(option)
+    else:
+        exit(code="200: Bye, bye the machine go off.")
 
 
 if __name__ == '__main__':
