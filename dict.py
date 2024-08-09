@@ -1,8 +1,8 @@
 conf = {
     'type': {
-        'coffee': '(coffee) - $1.0',
-        'chocolate': '(chocolate) - $2.0',
-        'the': '(the) - $1.5'
+        'coffee': '$1.0',
+        'chocolate': '$2.0',
+        'the': '$1.5'
     },
     'ingredients': {
         'coffee': {
