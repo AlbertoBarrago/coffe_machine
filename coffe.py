@@ -1,5 +1,5 @@
 # Coffe class
-from coffe_service import get_options, check_resources, calculate_change, prepare, ask_for_operation, askMoney
+from coffe_service import get_options, check_resources, calculate_change, prepare_product, ask_for_operation, askMoney
 
 
 class Coffe:
@@ -21,7 +21,7 @@ class Coffe:
             if check_resources(self, option):
                 money_payed = askMoney()
                 calculate_change(self, money_payed, self.conf['cost'][option])
-                prepare(self, option)
+                prepare_product(self, option)
                 ask_for_operation(self)
         else:
             exit(code="200: Bye, bye the machine go off.")

@@ -54,7 +54,7 @@ def calculate_change(self, money_paid, cost):
     print(f'\nHere is your change: {change}')
 
 
-def prepare(self, type_selected):
+def prepare_product(self, type_selected):
     """
     Prepare the product for the user and subtract ingredients from the machine.
     :param self:
@@ -81,6 +81,11 @@ def print_options(self):
 
 
 def report(self):
+    """
+    Get Report of product
+    :param self:
+    :return:
+    """
     total_money = self.conf['money']
     print("\n")
     for resource in self.conf['resources']:
@@ -93,6 +98,11 @@ def report(self):
 
 
 def start_coffe_machine(self):
+    """
+    Start the coffee machine.
+    :param self:
+    :return:
+    """
     has_enough_ingredients = True
 
     while has_enough_ingredients:
@@ -101,7 +111,7 @@ def start_coffe_machine(self):
         if check_resources(self, option):
             money_payed = askMoney()
             calculate_change(self, money_payed, self.conf['cost'][option])
-            prepare(self, option)
+            prepare_product(self, option)
             ask_for_operation(self)
     else:
         exit(code="200: Bye, bye the machine go off.")
@@ -109,7 +119,8 @@ def start_coffe_machine(self):
 
 def ask_for_operation(self):
     """
-    Ask for next operation
+    Ask for type of operation
+    :param self:
     :return:
     """
     operation_go_next = False
