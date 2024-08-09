@@ -7,4 +7,4 @@ if __name__ == '__main__':
         coffe_machine = Coffe(conf)
         coffe_machine.start_machine()
     else:
-        exit(code="Fuck you, bye the machine go off.")
+        exit(code="Turn off machine...")
