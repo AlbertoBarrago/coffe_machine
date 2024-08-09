@@ -1,13 +1,19 @@
 from time import sleep
+from prettytable import PrettyTable
 
 
 def get_options(self):
     """
-    Get the options for the coffe machine.
+    Get the options for the coffee machine.
     :return:
     """
+    table = PrettyTable()
+    table.field_names = ["Option", "Description"]
+
     for option in self.conf['type']:
-        print(self.conf['type'][option])
+        table.add_row([option, self.conf['type'][option]])
+
+    print(table)
     return input('\nWhat do you want to do?')
 
 
