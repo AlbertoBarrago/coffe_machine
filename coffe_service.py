@@ -8,7 +8,8 @@ def get_options(self):
     :return:
     """
     table = PrettyTable()
-    table.field_names = ["Option", "Description"]
+    table.field_names = ["Option", "Price"]
+    table.align = "l"
 
     for option in self.conf['type']:
         table.add_row([option, self.conf['type'][option]])
