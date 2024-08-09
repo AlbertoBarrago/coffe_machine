@@ -96,16 +96,18 @@ def ask_for_operation():
     """
     operation_go_next = False
     while not operation_go_next:
-        get_request = input(f'\nWhat do you want to do?\n report\n options\n proceed\n turn-off (just press Enter Key)\n')
+        get_request = input(f'\nWhat do you want to do?\n report\n options\n go\n')
         if get_request == 'report':
             report()
         elif get_request == 'options':
             print_options()
-        elif get_request == 'proceed':
+        elif get_request == 'go':
             operation_go_next = True
             start_coffe_machine()
-        else:
+        elif get_request == 'off':
             exit("Turn off machine")
+        else:
+            exit("Wrong input")
 
 
 def start_coffe_machine():
