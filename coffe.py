@@ -122,6 +122,9 @@ def ask_for_operation(self):
 
 
 class Coffe:
+    """
+    Coffe machine
+    """
 
     def __init__(self, conf_option, has_enough_ingredient):
         self.conf = conf_option
