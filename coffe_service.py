@@ -1,5 +1,7 @@
 from time import sleep
 from prettytable import PrettyTable
+import json
+from connect import Connection
 
 
 def get_options(self):
@@ -137,3 +139,20 @@ def ask_for_operation(self):
             exit("Turn off machine")
         else:
             exit("Wrong input")
+
+
+def save_coffee(type_value, money, operation_count):
+    """
+    Save the coffee machine
+    :param type_value:
+    :param money:
+    :param operation_count:
+    :return:
+    """
+    type_value = str(type_value)
+    money = float(money)
+    operation_count = int(operation_count)
+
+    conn = Connection('identifier.sqlite')
+    conn.insert_data(type_value, money, operation_count)
+    conn.close_connection()

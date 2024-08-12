@@ -9,27 +9,29 @@ class Connection:
 
     def create_table(self):
         self.cursor.execute(
-            '''CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, age INTEGER,
-            gender TEXT)''')
+            '''CREATE TABLE IF NOT EXISTS coffe (id INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT, money FLOAT,
+            operation_count INTEGER)''')
         self.conn.commit()
 
-    def insert_data(self, name, age, gender):
-        self.cursor.execute("INSERT INTO users (name, age, gender) VALUES (?,?,?)", (name, age, gender))
+    def insert_data(self, type_value, money, operation_count):
+        self.cursor.execute("INSERT INTO coffe (type, money, operation_count) VALUES (?,?,?)",
+                            (type_value, money, operation_count))
         self.conn.commit()
 
     def select_data(self):
-        self.cursor.execute("SELECT * FROM users")
+        self.cursor.execute("SELECT * FROM coffe")
         rows = self.cursor.fetchall()
         for row in rows:
             print(row)
         self.conn.commit()
 
-    def update_data(self, id, name, age, gender):
-        self.cursor.execute("UPDATE users SET name=?, age=?, gender=? WHERE id=?", (name, age, gender, id))
+    def update_data(self, id_value, type, money, operation_count):
+        self.cursor.execute("UPDATE coffe SET type=?, money=?, operation_count=? WHERE id=?",
+                            (type, money, operation_count, id_value))
         self.conn.commit()
 
-    def delete_data(self, id):
-        self.cursor.execute("DELETE FROM users WHERE id=?", (id,))
+    def delete_data(self, id_value):
+        self.cursor.execute("DELETE FROM coffe WHERE id=?", (id_value,))
         self.conn.commit()
 
     def close_connection(self):
