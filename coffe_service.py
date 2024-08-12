@@ -56,9 +56,10 @@ def calculate_change(self, money_paid, cost):
     print(f'\nHere is your change: {change}')
 
 
-def prepare_product(self, type_selected):
+def prepare_product(self, type_selected, money_payed , operation_count):
     """
     Prepare the product for the user and subtract ingredients from the machine.
+    :param money_payed:
     :param self:
     :param type_selected:
     :return:
@@ -70,6 +71,7 @@ def prepare_product(self, type_selected):
     sleep(2)
     print(f'{type_selected} is ready pay attention is really hot!')
     print(f'\n🚀 Operation completed.\n Ready for next Customer')
+    save_coffee(type_selected, money_payed, operation_count)
 
 
 def print_options(self):
@@ -113,7 +115,7 @@ def start_coffe_machine(self):
         if check_resources(self, option):
             money_payed = askMoney()
             calculate_change(self, money_payed, self.conf['cost'][option])
-            prepare_product(self, option)
+            prepare_product(self, option, money_payed, self.operation_count)
             ask_for_operation(self)
     else:
         exit(code="200: Bye, bye the machine go off.")
