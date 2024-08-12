@@ -1,3 +1,5 @@
 .venv
 .idea
 .DS_Store
+identifier.sqlite
+coffee.json

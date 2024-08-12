@@ -1,5 +1,7 @@
 from time import sleep
 from prettytable import PrettyTable
+import json
+from connect import Connection
 
 
 def get_options(self):
@@ -54,9 +56,10 @@ def calculate_change(self, money_paid, cost):
     print(f'\nHere is your change: {change}')
 
 
-def prepare(self, type_selected):
+def prepare_product(self, type_selected, money_payed , operation_count):
     """
     Prepare the product for the user and subtract ingredients from the machine.
+    :param money_payed:
     :param self:
     :param type_selected:
     :return:
@@ -68,6 +71,7 @@ def prepare(self, type_selected):
     sleep(2)
     print(f'{type_selected} is ready pay attention is really hot!')
     print(f'\n🚀 Operation completed.\n Ready for next Customer')
+    save_coffee(type_selected, money_payed, operation_count)
 
 
 def print_options(self):
@@ -81,6 +85,11 @@ def print_options(self):
 
 
 def report(self):
+    """
+    Get Report of product
+    :param self:
+    :return:
+    """
     total_money = self.conf['money']
     print("\n")
     for resource in self.conf['resources']:
@@ -93,6 +102,11 @@ def report(self):
 
 
 def start_coffe_machine(self):
+    """
+    Start the coffee machine.
+    :param self:
+    :return:
+    """
     has_enough_ingredients = True
 
     while has_enough_ingredients:
@@ -101,7 +115,7 @@ def start_coffe_machine(self):
         if check_resources(self, option):
             money_payed = askMoney()
             calculate_change(self, money_payed, self.conf['cost'][option])
-            prepare(self, option)
+            prepare_product(self, option, money_payed, self.operation_count)
             ask_for_operation(self)
     else:
         exit(code="200: Bye, bye the machine go off.")
@@ -109,7 +123,8 @@ def start_coffe_machine(self):
 
 def ask_for_operation(self):
     """
-    Ask for next operation
+    Ask for type of operation
+    :param self:
     :return:
     """
     operation_go_next = False
@@ -126,3 +141,20 @@ def ask_for_operation(self):
             exit("Turn off machine")
         else:
             exit("Wrong input")
+
+
+def save_coffee(type_value, money, operation_count):
+    """
+    Save the coffee machine
+    :param type_value:
+    :param money:
+    :param operation_count:
+    :return:
+    """
+    type_value = str(type_value)
+    money = float(money)
+    operation_count = int(operation_count)
+
+    conn = Connection('identifier.sqlite')
+    conn.insert_data(type_value, money, operation_count)
+    conn.close_connection()
